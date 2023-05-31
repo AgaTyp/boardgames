@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://ultraq.net.nz.thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista gier</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+<main layout:fragment="mainContent">
+  <div class="row justify-content-center gy-5">
+    <div class="col-9"></div>
+    <div class="col-9">
+      <h2 th:text="|Lista gier - kategoria: ${categoryName}|"></h2>
+    </div>
+    <div class="col-9">
+      <table class="table align-middle border-info">
+        <thead class="border-info" >
+        <tr class="text-center bg-info" >
+          <th >Tytuł</th>
+          <th ></th>
+          <th >Ulubione</th>
+          <th >Posiadam</th>
+        </tr>
+        </thead>
+
+        <tbody style="background-color: #e0f7fa;">
+        <tr class="text-left" th:each="game: ${boardgames}" th:object="${game}">
+          <td><a class="link-underline-info"  th:href="|/info?id=*{id}|" th:text="*{title}"></a></td>
+          <td class="text-center"><img class="rounded" style="width: 150px; height: 150px;" th:src="@{|/img/*{imageFile}|}" th:alt="*{title}"></td>
+          <td class="text-center" >
+
+                  <input class="form-check-input mt-0 border-info" type="checkbox" value="" th:checked="*{myFavorite}" disabled>
+
+          </td>
+          <td class="text-center">
+              <input class="form-check-input mt-0 border-info" type="checkbox" value="" th:checked="*{myOwn}" disabled>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <div class="col-9" style="height: 4.5rem"></div>
+</main>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>-->
+
+</body>
+</html>
