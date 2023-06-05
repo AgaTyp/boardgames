@@ -21,7 +21,7 @@ VALUES ('Na skrzydłach', 'Bardzo przyjemna, prosta do wytłumaczenia gra. Przep
        ('Twilight Struggle: Zimna Wojna 1945-1989', 'Super gra. Bardzo rozbudowana i złożona, ale jak się załapie mechanikę, to bardzo logiczna. Super oddaje klimat. Trzeba sobie zarezerwować około 3h',
         1, 2, 1, 1, '2023-05-15', '2023-05-10', true, true, 'twilight-struggle-zimna-wojna.png'),
        ('Potwory w Tokio', 'Duże pozytywne zaskoczenie. Gra niepozorna, a daje ogromną frajdę. Spora losowość, ale nadal można obmyślać strategię',
-       4, 4, 4, 3, '2023-05-18', '2023-05-18', false, false, 'potwory-w-tokio.jpg'),
+        4, 4, 4, 3, '2023-05-18', '2023-05-18', false, false, 'potwory-w-tokio.jpg'),
        ('Kroniki zamku Avel', 'Pięknie zrobiona gra w rodzaju planszowego RPG. Idealna na rodzinne granie',
         4, 1, 5, 3, null, '2023-05-30', false, true, 'kroniki-zamku-avel.png');;
 

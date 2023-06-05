@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    name: jdbc/boardgames_db
+    url: jdbc:postgresql://localhost:5432/boardgames_db?serverTimezone=UTC
+    driver-class-name: org.postgresql.Driver
+    username: aga
+    password: admin
+  liquibase:
+    contexts: prod
