@@ -23,8 +23,6 @@ public class Boardgame {
     private Category category;
     @ManyToOne(cascade = CascadeType.MERGE)
     private AgeRange ageRange;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private TimeRange timeRange;
     @ManyToOne(cascade = CascadeType.MERGE)
     private PlayerRange playerRange;
     @OneToMany
@@ -35,20 +33,31 @@ public class Boardgame {
     private boolean myOwn = false;
     private String imageFile;
 
+    private int minTime;
+    private int maxTime;
+
+    public int getMinTime() {
+        return minTime;
+    }
+
+    public void setMinTime(int minTime) {
+        this.minTime = minTime;
+    }
+
+    public int getMaxTime() {
+        return maxTime;
+    }
+
+    public void setMaxTime(int maxTime) {
+        this.maxTime = maxTime;
+    }
+
     public AgeRange getAgeRange() {
         return ageRange;
     }
 
     public void setAgeRange(AgeRange ageRange) {
         this.ageRange = ageRange;
-    }
-
-    public TimeRange getTimeRange() {
-        return timeRange;
-    }
-
-    public void setTimeRange(TimeRange timeRange) {
-        this.timeRange = timeRange;
     }
 
     public PlayerRange getPlayerRange() {

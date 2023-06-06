@@ -4,7 +4,8 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
-    <include file="0001_create_tables.xml" relativeToChangelogFile="true" />
-    <include file="testdata/0002_insert_first_data.xml" relativeToChangelogFile="true" context="dev"/>
-    <include file="0003_change_boardgame_table.xml" relativeToChangelogFile="true"/>
+    <changeSet id="0003_change_boardgame_table" author="aga">
+        <comment>Add time range to boardgame table</comment>
+        <sqlFile path="sql/0003_change_boardgame_table.sql" relativeToChangelogFile="true"/>
+    </changeSet>
 </databaseChangeLog>
