@@ -17,18 +17,16 @@ public class BoardgameController {
     private final CategoryRepository categoryRepository;
     private final StatsRepository statsRepository;
     private final PlayerRepository playerRepository;
-    private final TimeRepository timeRepository;
     private final PlayerRangeRepository playerRangeRepository;
 
     public BoardgameController(AgeRangeRepository ageRangeRepository, BoardgameRepository boardgameRepository,
                                CategoryRepository categoryRepository, StatsRepository statsRepository,
-                               PlayerRepository playerRepository, TimeRepository timeRepository, PlayerRangeRepository playerRangeRepository) {
+                               PlayerRepository playerRepository, PlayerRangeRepository playerRangeRepository) {
         this.ageRangeRepository = ageRangeRepository;
         this.boardgameRepository = boardgameRepository;
         this.categoryRepository = categoryRepository;
         this.statsRepository = statsRepository;
         this.playerRepository = playerRepository;
-        this.timeRepository = timeRepository;
         this.playerRangeRepository = playerRangeRepository;
     }
 
@@ -115,7 +113,6 @@ public class BoardgameController {
         model.addAttribute("categories", categories);
         model.addAttribute("newGame", new Boardgame());
         model.addAttribute("newAgeRange", new AgeRange());
-        model.addAttribute("newTimeRange", new TimeRange());
         model.addAttribute("newPlayerRange", new PlayerRange());
         model.addAttribute("newCategory", new Category());
         return "add_new_boardgame";
@@ -138,16 +135,6 @@ public class BoardgameController {
             boardgame.setAgeRange(ageRange1);
         } else {
             boardgame.getAgeRange().setId(ageRangeRepository.findByMinAge(boardgame.getAgeRange().getMinAge()).getId());
-        }
-
-        if (timeRepository.findByMinTimeAndMaxTime(boardgame.getTimeRange().getMinTime(), boardgame.getTimeRange().getMaxTime()) == null) {
-            TimeRange timeRange1 = new TimeRange();
-            timeRange1.setMinTime(boardgame.getTimeRange().getMinTime());
-            timeRange1.setMaxTime(boardgame.getTimeRange().getMaxTime());
-            timeRepository.save(timeRange1);
-        } else {
-            boardgame.getTimeRange().setId(timeRepository.findByMinTimeAndMaxTime(boardgame.getTimeRange().getMinTime(),
-                    boardgame.getTimeRange().getMaxTime()).getId());
         }
 
         if (playerRangeRepository.findByMinPlayersAndMaxPlayers(boardgame.getPlayerRange().getMinPlayers(),
@@ -192,9 +179,8 @@ public class BoardgameController {
         boardgame.getPlayerRange().setId(playerRangeRepository.findByMinPlayersAndMaxPlayers(boardgame.getPlayerRange().getMinPlayers(),
                 boardgame.getPlayerRange().getMaxPlayers()).getId());
         boardgame.setPlayerRange(boardgame.getPlayerRange());
-        boardgame.getTimeRange().setId(timeRepository.findByMinTimeAndMaxTime(boardgame.getTimeRange().getMinTime(),
-                boardgame.getTimeRange().getMaxTime()).getId());
-        boardgame.setTimeRange(boardgame.getTimeRange());
+        boardgame.setMinTime(boardgame.getMinTime());
+        boardgame.setMaxTime(boardgame.getMaxTime());
         boardgame.setDescription(boardgame.getDescription());
         boardgame.setImageFile(boardgame.getImageFile());
         boardgame.setLastTimePlayed(boardgame.getLastTimePlayed());
