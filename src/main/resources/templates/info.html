@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
       xmlns:layout="http://ultraq.net.nz.thymeleaf/layout"
       layout:decorate="~{layout}">
 <head>
@@ -69,12 +70,12 @@
             <div class="container text-center">
                 <div class="row justify-content-md-center">
                     <div class="col-4">
-                        <a class="btn btn-outline-primary" th:href="|/edit?id=*{id}|" role="button">Edytuj</a>
+                        <a class="btn btn-outline-primary" th:href="|/edit?id=*{id}|" role="button" sec:authorize="isAuthenticated()">Edytuj</a>
                     </div>
                 <div class="col-4">
                     <form action="/deleteGame" method="post">
                     <input type="hidden" name="id" th:value="*{id}">
-                    <input name="deleteButton" class="btn btn-outline-danger" type="submit" value="Usuń"></form>
+                    <input name="deleteButton" class="btn btn-outline-danger" type="submit" value="Usuń" sec:authorize="isAuthenticated()"></form>
                 </div>
                 </div>
             </div>
