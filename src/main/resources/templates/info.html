@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      xmlns:layout="http://ultraq.net.nz.thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lista gier</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+</head>
+<body>
+<main layout:fragment="mainContent">
+    <div class="row justify-content-center gy-5">
+        <div class="col-9"></div>
+        <div class="col-9">
+            <h2 th:text="|${boardgame.title}|"></h2>
+        </div>
+        <div class="col-9" th:object="${boardgame}">
+            <div class="container text-center">
+                <div class="row">
+                <span class="text-center"><img class="rounded" style="width: 400px; height: 400px;" th:src="@{|/img/*{imageFile}|}" th:alt="*{title}"></span>
+                </div>
+                <div class="row" style="height: 1.5rem"></div>
+            </div>
+
+            <div class=" input-group mb-3">
+                <label class="input-group-text border-info">Kategoria</label>
+                <input type="text" class="form-control border-info" th:field="*{category.name}" disabled>
+
+                <span class="input-group-text border-info">Minimalny wiek gracza</span>
+                <input type="text" class="form-control border-info" aria-label="Minimalny wiek" th:field="|*{ageRange.minAge}|" disabled>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text border-info">Liczba graczy</span>
+                <span class="input-group-text border-info">Min</span>
+                <input type="text" class="form-control border-info" aria-label="Minimalna liczba graczy" th:field="|*{playerRange.minPlayers}|" disabled>
+                <span class="input-group-text border-info">Max</span>
+                <input type="text" class="form-control border-info" aria-label="Maksymalna liczba graczy" th:field="|*{playerRange.maxPlayers}|" disabled>
+                <span class="input-group-text border-info">Czas rozgrywki [min]</span>
+                <span class="input-group-text border-info" id="basic-addon4">Min</span>
+                <input type="text" class="form-control border-info" aria-label="Minimalny czas rozgrywki" th:field="*{minTime}" disabled>
+                <span class="input-group-text border-info">Max</span>
+                <input type="text" class="form-control border-info" aria-label="Maksymalny czas rozgrywki" th:field="*{maxTime}" disabled>
+            </div>
+
+            <div class="input-group mb-3 ">
+                <span class="input-group-text border-info">Co sądzę:</span>
+                <textarea class="form-control border-info" disabled aria-label="Opis" th:field="*{description}"></textarea>
+            </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-text border-info">
+                        <span class="input-group border-info">Na liście ulubionych </span>
+                        <input class="form-check-input mt-0 border-info" type="checkbox" value="" aria-label="Ulubione" th:field="*{myFavorite}" disabled>
+                    </div>
+                    <div class="input-group-text border-info">
+                        <span class="input-group border-info"> </span>
+                    </div>
+                    <div class="input-group-text border-info">
+                        <span class="input-group border-info">Mam na półce</span>
+                        <input class="form-check-input mt-0 border-info" type="checkbox" value="" aria-label="Posiadam" th:field="*{myOwn}" disabled>
+                    </div>
+                </div>
+            <div class=" input-group mb-3">
+                <label class="input-group-text border-info">Dodana do bazy: </label>
+                <input type="text" class="form-control border-info" th:field="*{creationDate}" disabled>
+                <span class="input-group-text border-info">Ostatnia rozgrywka: </span>
+                <input type="text" class="form-control border-info" th:field="|*{lastTimePlayed}|" disabled>
+            </div>
+            <div class="container text-center">
+                <div class="row justify-content-md-center">
+                    <div class="col-4">
+                        <a class="btn btn-outline-primary" th:href="|/edit?id=*{id}|" role="button" sec:authorize="isAuthenticated()">Edytuj</a>
+                    </div>
+                <div class="col-4">
+                    <form action="/deleteGame" method="post">
+                    <input type="hidden" name="id" th:value="*{id}">
+                    <input name="deleteButton" class="btn btn-outline-danger" type="submit" value="Usuń" sec:authorize="isAuthenticated()"></form>
+                </div>
+                </div>
+            </div>
+        </div>
+
+      <hr class="border border-info border-1 opacity-25">
+<!--          <div class="row justify-content-center gy-2">-->
+<!--          <div class="col-9">-->
+<!--              <div class="col-9"></div>-->
+<!--              <div class="col-6">-->
+<!--                  <h3 th:text="|Statystyki|"></h3>-->
+<!--              </div>-->
+<!--              <div class="row justify-content-center gy-2">-->
+<!--                  <h5 th:text="|Najwięcej wygranych|"></h5>-->
+<!--              </div>-->
+<!--          <div class="row row-cols-5">-->
+<!--              <div class="col">-->
+<!--                  <ol class="list-group list-group-numbered" list-group-border-width="0">-->
+<!--                      <li class="list-group-item" th:each="winner: ${winners}" th:object="${winner}" >-->
+<!--                          <span th:text="${winner.key}"></span>-->
+<!--                          <span class="badge bg-info rounded-pill opacity-75" th:text="${winner.value}"></span></li>-->
+<!--                  </ol>-->
+<!--              </div>-->
+<!--          </div>-->
+<!--          </div>-->
+<!--      </div>-->
+
+    </div>
+    <div class="col-9" style="height: 4.5rem"></div>
+</main>
+
+</body>
+</html>
