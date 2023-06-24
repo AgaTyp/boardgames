@@ -33,4 +33,10 @@ public class AdminController {
         userService.deleteUserByName(username);
         return "redirect:/admin";
     }
+
+    @GetMapping("/change_role")
+    String changeUserRole(@RequestParam String username) {
+        userService.changeAdminRoleUserByName(username);
+        return "redirect:/admin";
+    }
 }

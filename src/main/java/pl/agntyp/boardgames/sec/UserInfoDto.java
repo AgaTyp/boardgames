@@ -1,6 +1,5 @@
 package pl.agntyp.boardgames.sec;
 
-
 public class UserInfoDto {
     private final String username;
     private final String firstName;

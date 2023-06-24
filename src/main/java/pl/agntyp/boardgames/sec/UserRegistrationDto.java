@@ -8,7 +8,6 @@ public class UserRegistrationDto {
     private String lastName;
     private String password;
 
-
     public String getUsername() {
         return username;
     }

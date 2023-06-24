@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 @Configuration
 public class SecurityConfig {
     @Bean
@@ -35,6 +34,7 @@ public class SecurityConfig {
         http.headers().frameOptions().sameOrigin();
         return http.build();
     }
+
     @Bean
     PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();

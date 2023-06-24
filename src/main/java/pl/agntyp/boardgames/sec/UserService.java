@@ -12,6 +12,7 @@ import java.util.Optional;
 @Service
 public class UserService {
     private static final String USER_ROLE = "USER";
+    private static final String ADMIN_ROLE = "ADMIN";
     private static final String ADMIN_AUTHORITY = "ROLE_ADMIN";
     private final UserRepository userRepository;
     private final UserRoleRepository userRoleRepository;
@@ -55,6 +56,13 @@ public class UserService {
                 .toList();
     }
 
+    public List<String> findAllAdminsNames() {
+        return userRepository.findAllByRoles_Name(ADMIN_ROLE)
+                .stream()
+                .map(User::getUsername)
+                .toList();
+    }
+
     @Transactional
     public void deleteUserByName(String username) {
         if (isCurrentUserAdmin() && isUser(username)) {
@@ -62,8 +70,35 @@ public class UserService {
         }
     }
 
+    @Transactional
+    public void changeAdminRoleUserByName(String username) {
+        Optional<User> user = findUserByUsername(username);
+        if (isAdmin(username)) {
+            user.ifPresent(u -> {
+                u.getRoles().removeIf(role -> (role.getName().equals("ADMIN")));
+                userRepository.save(u);
+            });
+        } else {
+            Optional<UserRole> userRole = userRoleRepository.findByName(ADMIN_ROLE);
+            user.ifPresent(u -> {
+                userRole.ifPresentOrElse(
+                        role -> u.getRoles().add(role),
+                        () -> {
+                            throw new NoSuchElementException();
+                        });
+                userRepository.save(u);
+            });
+        }
+    }
+
     private boolean isUser(String username) {
         return findAllUsersNames()
+                .stream()
+                .anyMatch(user -> user.equals(username));
+    }
+
+    private boolean isAdmin(String username) {
+        return findAllAdminsNames()
                 .stream()
                 .anyMatch(user -> user.equals(username));
     }
@@ -87,7 +122,8 @@ public class UserService {
         Optional<UserRole> userRole = userRoleRepository.findByName(USER_ROLE);
         userRole.ifPresentOrElse(
                 role -> user.getRoles().add(role),
-                () -> { throw new NoSuchElementException();
+                () -> {
+                    throw new NoSuchElementException();
                 }
         );
         userRepository.save(user);
@@ -105,18 +141,5 @@ public class UserService {
                     userRepository.save(u);
                 }
         );
-
-//        user.setFirstName(registration.getFirstName());
-//        user.setLastName(registration.getLastName());
-//        user.setUsername(registration.getUsername());
-//        String passwordHash = passwordEncoder.encode(registration.getPassword());
-//        user.setPassword(passwordHash);
-//        Optional<UserRole> userRole = userRoleRepository.findByName(USER_ROLE);
-//        userRole.ifPresentOrElse(
-//                role -> user.getRoles().add(role),
-//                () -> { throw new NoSuchElementException();
-//                }
-//        );
-//        userRepository.save(user);
     }
 }
