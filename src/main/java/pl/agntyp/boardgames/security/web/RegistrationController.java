@@ -1,11 +1,11 @@
-package pl.agntyp.boardgames.sec.web;
+package pl.agntyp.boardgames.security.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import pl.agntyp.boardgames.sec.UserRegistrationDto;
-import pl.agntyp.boardgames.sec.UserService;
+import pl.agntyp.boardgames.security.UserRegistrationDto;
+import pl.agntyp.boardgames.security.UserService;
 
 @Controller
 public class RegistrationController {
@@ -25,11 +25,6 @@ public class RegistrationController {
     @PostMapping("/register")
     String register(UserRegistrationDto userRegistrationDto) {
         userService.register(userRegistrationDto);
-        return "redirect:/confirmation";
-    }
-
-    @GetMapping("/confirmation")
-    String registrationConfirmation() {
-        return "registration-confirmation";
+        return "redirect:/login?registered";
     }
 }

@@ -1,7 +1,4 @@
-package pl.agntyp.boardgames.sec;
-
-import java.util.Set;
-import java.util.stream.Collectors;
+package pl.agntyp.boardgames.security;
 
 public class UserInfoDtoMapper {
     static UserInfoDto map(User user) {

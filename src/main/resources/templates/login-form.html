@@ -10,11 +10,27 @@
 </head>
 <body>
 <main layout:fragment="mainContent">
+
+
+
   <div class="row justify-content-center gy-5">
     <div class="col-9"></div>
     <div class="col-9">
+    <div class="alert alert-danger d-flex align-items-center" role="alert" th:if="${param.keySet().contains('error')}">
+<!--          <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:"><use xlink:href="#exclamation-triangle-fill"/></svg>-->
+      <div>Błąd logowania</div>
+    </div>
+
+      <div class="alert alert-success d-flex align-items-center" role="alert" th:if="${param.keySet().contains('registered')}">
+<!--        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>-->
+        <div>Rejestracja zakończona. Możesz się zalogować</div>
+      </div>
+
+    </div>
+    <div class="col-9">
       <h2 th:text="|Zaloguj się|"></h2>
     </div>
+
     <div class="col-9">
       <form class="row gy-2 gx-3 align-items-center" th:action="@{/login}" method="post">
 
@@ -29,6 +45,7 @@
 
 
         <div class="input-group mb-3">
+<!--            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />-->
           <input class="btn btn-outline-primary" type="submit" value="Zaloguj">
         </div>
       </form>

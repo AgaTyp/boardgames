@@ -20,27 +20,55 @@
 
         <div class="input-group mb-3">
           <span class="input-group-text border-info" id="basic-addon1">Nazwa użytkownika</span>
-          <input type="text" disabled class="form-control border-info" aria-label="Name" th:field="*{username}" th:value="*{username}" th:default="*{username}">
+          <input type="text" disabled class="form-control border-info" aria-label="Name" th:field="*{username}" th:value="*{username}">
         </div>
-        <div class="input-group mb-3">
-          <span class="input-group-text border-info" id="basic-addon2">Hasło</span>
-          <input type="password" class="form-control border-info" aria-label="Password" th:field="*{password}" th:value="*{password}" th:default="*{password}">
-        </div>
+<!--        <div class="input-group mb-3">-->
+<!--          <span class="input-group-text border-info" id="basic-addon2">Hasło</span>-->
+<!--          <input type="password" class="form-control border-info" aria-label="Password" th:field="*{password}" th:value="*{password}" th:default="*{password}">-->
+<!--        </div>-->
         <div class="input-group mb-3">
           <span class="input-group-text border-info" id="basic-addon3">Imię</span>
-          <input type="text" class="form-control border-info" aria-label="Name" th:field="*{firstName}" th:value="*{firstName}" th:default="*{firstName}">
+          <input type="text" class="form-control border-info" aria-label="Name" th:field="*{firstName}" th:value="*{firstName}">
         </div>
         <div class="input-group mb-3">
           <span class="input-group-text border-info" id="basic-addon4">Nazwisko</span>
-          <input type="text" class="form-control border-info" aria-label="Name" th:field="*{lastName}" th:value="*{lastName}" th:default="*{lastName}">
+          <input type="text" class="form-control border-info" aria-label="Name" th:field="*{lastName}" th:value="*{lastName}">
         </div>
 
         <div class="input-group mb-3">
-          <input type="hidden" name="isAdmin" th:value="*{isAdmin()}">
+<!--          <input type="hidden" name="isAdmin" th:value="*{isAdmin()}">-->
           <input class="btn btn-outline-primary" type="submit" value="Zapisz zmiany">
         </div>
       </form>
+
   </div>
+    <div class="col-9">
+      <form class="row gy-2 gx-3 align-items-center" th:action="@{/change_password}" method="post">
+
+<!--        <div class="input-group mb-3">-->
+<!--          <span class="input-group-text border-info" id="basic-addon1">Nazwa użytkownika</span>-->
+<!--          <input type="text" disabled class="form-control border-info" aria-label="Name" th:field="*{username}" th:value="*{username}">-->
+<!--        </div>-->
+        <div class="input-group mb-3">
+          <span class="input-group-text border-info" id="basic-addon5">Nowe Hasło</span>
+          <input type="password" class="form-control border-info" aria-label="Password" name="newPassword">
+        </div>
+<!--        <div class="input-group mb-3">-->
+<!--          <span class="input-group-text border-info" id="basic-addon3">Imię</span>-->
+<!--          <input type="text" class="form-control border-info" aria-label="Name" th:field="*{firstName}" th:value="*{firstName}">-->
+<!--        </div>-->
+<!--        <div class="input-group mb-3">-->
+<!--          <span class="input-group-text border-info" id="basic-addon4">Nazwisko</span>-->
+<!--          <input type="text" class="form-control border-info" aria-label="Name" th:field="*{lastName}" th:value="*{lastName}">-->
+<!--        </div>-->
+
+        <div class="input-group mb-3">
+          <!--          <input type="hidden" name="isAdmin" th:value="*{isAdmin()}">-->
+          <input class="btn btn-outline-primary" type="submit" value="Zmień hasło">
+        </div>
+      </form>
+
+    </div>
   </div>
 
 

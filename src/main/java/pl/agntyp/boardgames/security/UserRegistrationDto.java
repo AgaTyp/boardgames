@@ -1,6 +1,4 @@
-package pl.agntyp.boardgames.sec;
-
-import java.util.Set;
+package pl.agntyp.boardgames.security;
 
 public class UserRegistrationDto {
     private String username;

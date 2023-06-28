@@ -1,12 +1,12 @@
-package pl.agntyp.boardgames.sec.web;
+package pl.agntyp.boardgames.security.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.agntyp.boardgames.sec.UserInfoDto;
-import pl.agntyp.boardgames.sec.UserService;
+import pl.agntyp.boardgames.security.UserInfoDto;
+import pl.agntyp.boardgames.security.UserService;
 
 import java.util.List;
 

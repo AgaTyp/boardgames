@@ -76,7 +76,7 @@
                         <a class="nav-link" href="/admin" sec:authorize="hasRole('ADMIN')">Panel administratora</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="/user-panel" th:href="|/user-panel?username=${#authentication.principal.username}|" sec:authorize="isAuthenticated()">Mój profil</a>
+                        <a class="nav-link" href="/user-panel" th:href="|/user-panel|" sec:authorize="isAuthenticated()">Mój profil</a>
                     </li>
                     <li><hr class="dropdown-divider"></li>
                     <li>

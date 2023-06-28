@@ -1,4 +1,4 @@
-package pl.agntyp.boardgames.sec.config;
+package pl.agntyp.boardgames.security.config;
 
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -22,13 +22,16 @@ public class SecurityConfig {
                 .requestMatchers("/category").permitAll()
                 .requestMatchers("/img/**", "/styles/**").permitAll()
                 .requestMatchers("/register", "/confirmation").permitAll()
-                .requestMatchers("/user_panel", "/change-password", "/add_new_boardgame", "/edit").hasAnyRole("USER", "ADMIN")
+                .requestMatchers("/user-panel", "/change_password", "/add_new_boardgame", "/edit").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 .anyRequest().authenticated());
-        http.formLogin(login -> login.loginPage("/login").permitAll());
-        http.logout(logout ->
-                        logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout/**", HttpMethod.GET.name()))
-                                .logoutSuccessUrl("/"));
+        http.formLogin(login -> login.loginPage("/login").permitAll().successForwardUrl("/"));
+        http.logout(logout -> {
+            logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout?changed", HttpMethod.GET.name()))
+                                .logoutSuccessUrl("/?changed");
+            logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout/**", HttpMethod.GET.name()))
+                    .logoutSuccessUrl("/");
+        });
 //        http.csrf().disable();
         http.csrf(csrf -> csrf.ignoringRequestMatchers(h2ConsoleRequestMatcher));
         http.headers().frameOptions().sameOrigin();

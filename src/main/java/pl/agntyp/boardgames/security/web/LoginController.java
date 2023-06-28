@@ -1,4 +1,4 @@
-package pl.agntyp.boardgames.sec.web;
+package pl.agntyp.boardgames.security.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,4 +10,5 @@ public class LoginController {
     String loginForm() {
         return "login-form";
     }
+
 }

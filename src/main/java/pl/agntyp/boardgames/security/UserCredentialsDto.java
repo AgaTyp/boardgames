@@ -1,4 +1,4 @@
-package pl.agntyp.boardgames.sec;
+package pl.agntyp.boardgames.security;
 
 import java.util.Set;
 

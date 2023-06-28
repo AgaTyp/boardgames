@@ -1,5 +1,6 @@
-package pl.agntyp.boardgames.sec;
+package pl.agntyp.boardgames.security;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -130,16 +131,26 @@ public class UserService {
     }
 
     @Transactional
-    public void edit(UserInfoDto edition) {
-        Optional<User> user = findUserByUsername(edition.getUsername());
+    public void editInfo(UserEditInfoDto edition) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+        Optional<User> user = findUserByUsername(username);
         user.ifPresent(
                 u -> {
-                    u.setUsername(edition.getUsername());
+//                    u.setUsername(edition.getUsername());
                     u.setFirstName(edition.getFirstName());
                     u.setLastName(edition.getLastName());
-                    u.setPassword(passwordEncoder.encode(edition.getPassword()));
+//                    u.setPassword(passwordEncoder.encode(edition.getPassword()));
                     userRepository.save(u);
                 }
         );
+    }
+
+    @Transactional
+    public void changeCurrentUserPassword(String newPassword) {
+        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        User currentUser = userRepository.findByUsername(currentUsername).orElseThrow();
+        String newPasswordHash = passwordEncoder.encode(newPassword);
+        currentUser.setPassword(newPasswordHash);
     }
 }
