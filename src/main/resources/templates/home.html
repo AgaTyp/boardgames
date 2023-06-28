@@ -12,6 +12,10 @@
 <main layout:fragment="mainContent">
   <div class="row justify-content-center gy-5">
     <div class="col-9"></div>
+    <div class="alert alert-primary d-flex align-items-center" role="alert" th:if="${param.keySet().contains('changed')}">
+      <!--        <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>-->
+      <div>Hasło zmienione. Możesz się zalogować</div>
+    </div>
     <div class="col-9">
     <table class="table align-middle">
       <thead>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pl" xmlns:th="http://www.thymeleaf.org">
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -36,12 +36,54 @@
           <li class="nav-item">
             <a class="nav-link disabled" href="/what_to_play">Nie wiem w co zagrać</a>
           </li>
+
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/login-form" sec:authorize="isAnonymous()">Zaloguj</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#" th:href="@{/register}" sec:authorize="isAnonymous()">Utwórz konto</a>-->
+<!--            </li>-->
           <li class="nav-item">
-            <a class="nav-link" href="/add_new_boardgame">Dodaj nową grę</a>
+            <a class="nav-link" href="/add_new_boardgame" sec:authorize="isAuthenticated()">Dodaj nową grę</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="/add_new_play">Dodaj nową rozgrywkę</a>
+            <a class="nav-link disabled" href="/add_new_play" sec:authorize="isAuthenticated()">Dodaj nową rozgrywkę</a>
           </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="/user_panel" sec:authorize="isAuthenticated()">Mój profil</a>-->
+<!--            </li>-->
+            <li class="nav-item">
+                    <a class="nav-link text-primary" href="#" sec:authorize="isAuthenticated()" th:text="|Witaj ${#authentication.principal.username}|"></a>
+            </li>
+<!--            <li class="nav-item" >-->
+<!--                <h6 sec:authorize="isAuthenticated()" th:text="|Witaj ${#authentication.principal.username}|"></h6>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()" th:text="|Wyloguj|">Wyloguj</a>-->
+<!--            </li>-->
+            <li class="nav-item dropdown ">
+                <a class="nav-link dropdown-toggle"  href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Konto
+                </a>
+                <ul class="dropdown-menu" >
+                    <li>
+                        <a class="nav-link" href="/login-form" sec:authorize="isAnonymous()">Zaloguj</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="#" th:href="@{/register}" sec:authorize="isAnonymous()">Utwórz konto</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/admin" sec:authorize="hasRole('ADMIN')">Panel administratora</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="/user-panel" th:href="|/user-panel|" sec:authorize="isAuthenticated()">Mój profil</a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li>
+                        <a class="nav-link" th:href="@{/logout}" sec:authorize="isAuthenticated()" th:text="|Wyloguj|">Wyloguj</a>
+                    </li>
+                </ul>
+            </li>
 <!--          <li class="nav-item">-->
 <!--            <a class="nav-link disabled">Disabled</a>-->
 <!--          </li>-->

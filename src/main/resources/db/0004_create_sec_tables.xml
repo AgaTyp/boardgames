@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <changeSet id="0004_1_application_user_table" author="aga">
+        <comment>Create application user table</comment>
+        <createTable tableName="application_user">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="username" type="VARCHAR(50)" >
+                <constraints nullable="false" unique="true" uniqueConstraintName="username_const"/>
+            </column>
+            <column name="first_name" type="VARCHAR(100)" />
+            <column name="last_name" type="VARCHAR(100)" />
+            <column name="password" type="VARCHAR(100)">
+            <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="0004_2_user_role_table" author="aga">
+        <comment>Create user_role table</comment>
+        <createTable tableName="user_role">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(20)">
+            <constraints nullable="false"/>
+            </column>
+            <column name="description" type="VARCHAR(200)">
+            <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet id="0004_3_user_roles_table" author="aga">
+        <createTable tableName="user_roles">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="user_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="user_roles"
+                                 baseColumnNames="user_id"
+                                 constraintName="fk_user_id"
+                                 referencedTableName="application_user"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_roles"
+                                 baseColumnNames="role_id"
+                                 constraintName="fk_role_id"
+                                 referencedTableName="user_role"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+    <changeSet id="0004_4_add_admin_account" author="aga">
+        <comment>Add admin account</comment>
+        <sqlFile path="sql/0004_add_admin.sql" relativeToChangelogFile="true"/>
+    </changeSet>
+</databaseChangeLog>
